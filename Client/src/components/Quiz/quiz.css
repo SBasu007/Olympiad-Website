@@ -1,0 +1,23 @@
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.parent{
+    display: flex;
+    justify-content: center;  /* Centers horizontally */
+    align-items: center;      /* Centers vertically */
+    gap: 20px;                /* Adds spacing between .left and .right */
+    height: 100vh;            /* Ensures full viewport height */
+    margin-left:auto;
+}
+.left{
+    background:blue;
+    height:80vh;
+    width:50vw;
+}
+.right{
+    background:white;
+    height:80vh;
+    width:30vw;
+}
