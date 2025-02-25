@@ -21,3 +21,30 @@ body{
     height:80vh;
     width:30vw;
 }
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .navigate-buttons {
+    margin-top: 20px;
+  }
+  
+  button {
+    padding: 10px;
+    border: none;
+    background: white;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  button:hover {
+    background: black;
+  }
