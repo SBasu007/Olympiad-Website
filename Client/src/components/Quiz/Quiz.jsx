@@ -65,7 +65,7 @@ function QuizPage() {
     );
   };
 
-  // ✅ Logs updated quizData whenever it changes
+  // Logs updated quizData whenever it changes
   useEffect(() => {
     console.log("Updated quizData:", quizData);
   }, [quizData]); // Runs whenever quizData updates
@@ -73,7 +73,18 @@ function QuizPage() {
   const handleSubmit = () => {
     setIsSubmitted(true);
   };
-
+  const saveAndNext = () => {
+    if (selectedAnswer){
+      if (currentQuestionIndex < quizData.length - 1 ){
+        setCurrentQuestionIndex(currentQuestionIndex + 1);
+        setSelectedAnswer("");
+      }else{
+        alert("Exam Over")
+      }
+    }else{
+      alert("Please select an answer")
+    }
+  }
   const handleNext = () => {
     if (currentQuestionIndex < quizData.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
@@ -107,13 +118,9 @@ function QuizPage() {
         </div>
 
         <div className="navigate-buttons">
-          {!isSubmitted ? (
-            <button onClick={handleSubmit} disabled={!selectedAnswer}>
-              Submit
-            </button>
-          ) : (
-            <button onClick={handleNext}>Next</button>
-          )}
+          <button onClick={saveAndNext}>Save and Next</button>
+          <button onClick={handleNext}>Next</button>
+          <button>Submit</button>
         </div>
       </div>
 

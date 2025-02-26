@@ -18,6 +18,7 @@ body{
 }
 .right{
     background:white;
+    color:black;
     height:80vh;
     width:30vw;
 }
@@ -35,14 +36,16 @@ body{
   
   .navigate-buttons {
     margin-top: 20px;
+    display:flex;
   }
   
   button {
     padding: 10px;
     border: none;
-    background: white;
+    background: rgb(187, 116, 11);
     cursor: pointer;
     border-radius: 5px;
+    margin:0px 10px
   }
   
   button:hover {
