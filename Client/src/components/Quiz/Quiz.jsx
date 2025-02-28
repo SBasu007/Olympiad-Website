@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import "./quiz.css";
 
 const initialQuizData = [
@@ -8,6 +9,7 @@ const initialQuizData = [
     options: ["Delhi", "Calcutta", "Mumbai", "Chennai"],
     correct: "Delhi",
     attempted: "",
+    visited: false, 
   },
   {
     id: 2,
@@ -15,6 +17,7 @@ const initialQuizData = [
     options: ["Earth", "Mars", "Jupiter", "Venus"],
     correct: "Mars",
     attempted: "",
+    visited: false,
   },
   {
     id: 3,
@@ -27,13 +30,20 @@ const initialQuizData = [
     ],
     correct: "Rabindranath Tagore",
     attempted: "",
+    visited: false,
   },
   {
     id: 4,
     question: "What is the largest ocean on Earth?",
-    options: ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
+    options: [
+      "Atlantic Ocean",
+      "Indian Ocean",
+      "Arctic Ocean",
+      "Pacific Ocean",
+    ],
     correct: "Pacific Ocean",
     attempted: "",
+    visited: false,
   },
   {
     id: 5,
@@ -41,6 +51,7 @@ const initialQuizData = [
     options: ["Amazon River", "Nile River", "Ganges River", "Yangtze River"],
     correct: "Nile River",
     attempted: "",
+    visited: false,
   },
 ];
 
@@ -48,58 +59,111 @@ function QuizPage() {
   const [quizData, setQuizData] = useState(initialQuizData);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState("");
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [minutes, setMinutes] = useState(5); // Set the starting minutes
+  const [seconds, setSeconds] = useState(0); // Set the starting seconds
+  const navigate = useNavigate();
+  const buttonRefs = useRef([]);
 
   const currentQuestion = quizData[currentQuestionIndex];
-
+  
   if (!currentQuestion) return <h2>Quiz Completed!</h2>;
 
-  const handleAnswerChange = (option) => {
-    setSelectedAnswer(option);
+  useEffect(() => {
+    setSelectedAnswer(quizData[currentQuestionIndex].attempted || "");
+  }, [currentQuestionIndex, quizData]);
 
-    // Correctly updating the attempted answer in state
+  useEffect(() => {
     setQuizData((prevQuizData) =>
       prevQuizData.map((q, index) =>
-        index === currentQuestionIndex ? { ...q, attempted: option } : q
+        index === currentQuestionIndex ? { ...q, visited: true } : q
       )
     );
-  };
+  }, [currentQuestionIndex]);
 
-  // Logs updated quizData whenever it changes
+  // Timer logic with auto-submit when time runs out
   useEffect(() => {
-    console.log("Updated quizData:", quizData);
-  }, [quizData]); // Runs whenever quizData updates
+    const timer = setInterval(() => {
+      if (seconds > 0) {
+        setSeconds((prev) => prev - 1);
+      } else {
+        if (minutes > 0) {
+          setMinutes((prev) => prev - 1);
+          setSeconds(59);
+        } else {
+          clearInterval(timer);
+          handleSubmit(); // Auto-submit when the timer reaches 00:00
+        }
+      }
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [minutes, seconds]); 
 
   const handleSubmit = () => {
-    setIsSubmitted(true);
+    let score = 0;
+    quizData.forEach((q) => {
+      if (q.attempted === q.correct) score++;
+    });
+    alert("Time's up! Quiz submitted.");
+    navigate("/score",{ state: { score } });
   };
+
   const saveAndNext = () => {
-    if (selectedAnswer){
-      if (currentQuestionIndex < quizData.length - 1 ){
+    if (selectedAnswer) {
+      setQuizData((prevQuizData) =>
+        prevQuizData.map((q, index) =>
+          index === currentQuestionIndex
+            ? { ...q, attempted: selectedAnswer }
+            : q
+        )
+      );
+
+      if (buttonRefs.current[currentQuestionIndex]) {
+        buttonRefs.current[currentQuestionIndex].style.backgroundColor = "green";
+      }
+
+      if (currentQuestionIndex < quizData.length - 1) {
         setCurrentQuestionIndex(currentQuestionIndex + 1);
         setSelectedAnswer("");
-      }else{
-        alert("Exam Over")
+      } else {
+        alert("Exam Over");
       }
-    }else{
-      alert("Please select an answer")
+    } else {
+      alert("Please select an answer");
     }
-  }
+  };
+
   const handleNext = () => {
     if (currentQuestionIndex < quizData.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
       setSelectedAnswer("");
-      setIsSubmitted(false);
     } else {
       alert("Quiz Completed!");
     }
   };
 
+  const handlePrevious = () => {
+    if (currentQuestionIndex > 0) {
+      setCurrentQuestionIndex(currentQuestionIndex - 1);
+      setSelectedAnswer("");
+    } else {
+      alert("This is the first question");
+    }
+  };
+
+  const handleQuestionClick = (index) => {
+    setCurrentQuestionIndex(index);
+  };
+
   return (
     <div className="parent">
       <div className="left">
+        <div className="time">
+          <div className="minutes">{minutes < 10 ? `0${minutes}` : minutes}</div>
+          <div className="seconds">{seconds < 10 ? `0${seconds}` : seconds}</div>
+        </div>
         <div className="question">
-          <h2>{currentQuestion.question}</h2>
+          <h2>{currentQuestion.id}.{currentQuestion.question}</h2>
         </div>
 
         <div className="options">
@@ -110,7 +174,7 @@ function QuizPage() {
                 name="answer"
                 value={option}
                 checked={selectedAnswer === option}
-                onChange={() => handleAnswerChange(option)}
+                onChange={() => setSelectedAnswer(option)}
               />
               {option}
             </label>
@@ -120,14 +184,29 @@ function QuizPage() {
         <div className="navigate-buttons">
           <button onClick={saveAndNext}>Save and Next</button>
           <button onClick={handleNext}>Next</button>
-          <button>Submit</button>
+          <button onClick={handleSubmit}>Submit</button>
+          <button onClick={handlePrevious}>Previous</button>
         </div>
       </div>
 
       <div className="right">
-        <h3>
-          Progress: {currentQuestionIndex + 1} / {quizData.length}
-        </h3>
+        {quizData.map((question, index) => (
+          <button
+            key={index}
+            className="quiz-box"
+            ref={(el) => (buttonRefs.current[index] = el)}
+            onClick={() => handleQuestionClick(index)}
+            style={{
+              backgroundColor: question.attempted
+                ? "green"
+                : question.visited
+                ? "orange"
+                : "grey",
+            }}
+          >
+            {question.id}
+          </button>
+        ))}
       </div>
     </div>
   );

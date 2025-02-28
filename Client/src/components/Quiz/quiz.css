@@ -14,13 +14,13 @@ body{
 .left{
     background:blue;
     height:80vh;
-    width:50vw;
+    width:60vw;
 }
 .right{
     background:white;
     color:black;
     height:80vh;
-    width:30vw;
+    width:20vw;
 }
 .options {
     display: flex;
@@ -50,4 +50,18 @@ body{
   
   button:hover {
     background: black;
+  }
+
+  .quiz-box {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px 15px;
+    border: 1px solid #333;
+    background-color: #f5f5f5;
+    cursor: pointer;
+    color:black
+  }
+  
+  .quiz-box:hover {
+    background-color: #2a58bc;
   }
