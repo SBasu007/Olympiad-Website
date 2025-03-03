@@ -60,7 +60,7 @@ const initialQuizData = [
     correct: "70°",
     attempted: "",
     visited: false,
-    img: null,
+    img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgVCaULex-nE9COPXFWi3v5mshjGpuPlDH_wkNFMk2KI-uzOTvYVOLYq2l-9rkgkc5L7tKkK-7-6-878dKS2QQbZsZPVCOhY2s-HM6osWlo9AgoOCiMOgxCGhQOtWI_FxRsFN1QtlhEMAE/s1600/tri.JPG",
   },
 
   // Computer Science

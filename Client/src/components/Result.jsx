@@ -6,7 +6,7 @@ function Result() {
 
     return (
         <>
-            <h2 style={{color:"black"}}>Your Score: {score}/5</h2>
+            <h2 style={{color:"black"}}>Your Score: {score}/10</h2>
             <p style={{color:"black"}}>This is a demo quiz and certificate will be generated for actual exams</p>
         </>
     );
