@@ -3,29 +3,35 @@ body{
     justify-content: center;
     align-items: center;
 }
-.parent{
-    display: flex;
-    justify-content: center;  /* Centers horizontally */
-    align-items: center;      /* Centers vertically */
-    gap: 20px;                /* Adds spacing between .left and .right */
-    height: 100vh;            /* Ensures full viewport height */
-    margin-left:auto;
+.parent {
+  display: flex;
+  justify-content: center;  /* Centers horizontally */
+  gap: 20px;                /* Adds spacing between .left and .right */
+  height: 100vh;            /* Ensures full viewport height */
+  width: 100%;
+  margin-top: 30px;;              /* Make sure it takes the full width */
 }
 .left{
-    background:blue;
-    height:80vh;
+    background:white;
+    color:black;
+    height:max-content;
     width:60vw;
+    
 }
 .right{
     background:white;
     color:black;
-    height:80vh;
+    height:90vh;
     width:20vw;
 }
 .options {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    margin-left:40px;
+  }
+  .question{
+    margin-left: 20px;
   }
   
   .option {
@@ -37,7 +43,34 @@ body{
   .navigate-buttons {
     margin-top: 20px;
     display:flex;
+    margin-left: 20px;
   }
+  .details{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin:20px 0;
+  }
+  .row{
+    height:30px;
+    margin-top:10px;
+  }
+  .color{
+    height:30px;
+    width:50px;
+    margin-top:10px;
+  }
+  .nv{
+  background-color: grey;
+}
+.v{
+  background-color: orange;
+}
+.s{
+  background-color: green;
+}
   
   button {
     padding: 10px;
@@ -54,6 +87,9 @@ body{
 
   .quiz-box {
     display: inline-block;
+    width: 40px; /* Set a fixed width for all buttons */
+    height: 40px;
+    text-align: center;
     margin: 10px;
     padding: 10px 15px;
     border: 1px solid #333;
@@ -65,3 +101,134 @@ body{
   .quiz-box:hover {
     background-color: #2a58bc;
   }
+  .timer{
+    width:30%;
+    height:20%;
+    margin-bottom :10px;
+    color:black;
+    margin-left:auto;
+    display:flex;
+    margin-right:10px;
+  }
+  .number{
+    background-color: rgb(195, 195, 195);
+    width:100%;
+    padding:5px;
+    border-radius: 2%;
+  }
+  .name{
+    margin: auto 0;
+    margin-right:10px;
+  }
+  .minutes{
+    margin-top:20px;
+  }
+ .picture{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+ }
+ .image{
+  margin-bottom: 10px;
+ }
+ .submit{
+  margin-bottom: 20px;
+  padding:15px;
+ }
+ .previous{
+  background-color: orangered;
+ }
+ .savenext{
+  background-color: orange;
+ }
+ .clear{
+  background-color: rgb(22, 37, 192);
+ }
+ .submit{
+  background-color: green;
+ }
+ .abc{
+  width:200px;
+ }
+ .custom-radio {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+.custom-radio input {
+  display: none; /* Hide the default radio button */
+}
+
+.radio-btn {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #999;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  margin-right: 10px;
+}
+
+/* When selected, change color */
+.custom-radio input:checked + .radio-btn {
+  background-color: rgb(233, 165, 29); /* Change to your preferred color */
+  border-color: rgb(219, 116, 42);
+}
+
+/* Inner dot effect */
+.custom-radio input:checked + .radio-btn::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  background-color: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+ @media screen and (max-width: 768px) {
+  .parent {
+      flex-direction: column;
+      align-items: center;
+      height: auto;
+      margin: 20px 0;
+  }
+
+  .left, .right {
+      width: 90vw; /* Adjust width to fit smaller screens */
+      height: auto;
+      padding: 10px;
+      margin-top:10px
+  }
+
+  .right {
+      height: auto; /* Allow content to adjust dynamically */
+
+  }
+
+  .timer {
+      width: 100%; /* Full width for better visibility */
+      justify-content: center;
+      margin-right: 0;
+  }
+
+  .navigate-buttons {
+      flex-direction: column;
+      align-items: center;
+  }
+  
+  button {
+      width: 80%; /* Make buttons take more space for touch-friendliness */
+      margin: 5px 0;
+  }
+  .quiz-box{
+    width:13%;
+    display: inline-block;
+    margin-right:12px;
+  }
+
+}
