@@ -241,6 +241,8 @@ function QuizPage() {
   };
 
   return (
+    <>
+    <div className="ctss-header">CALCUTTA TALENT SEARCH SCHOOL</div>
     <div className="parent">
       <div className="left">
         <div className="time">
@@ -324,6 +326,8 @@ function QuizPage() {
         ))}
       </div>
     </div>
+    <div className="ctss-footer">© BASU TECH 2025</div>
+    </>
   );
 }
 
