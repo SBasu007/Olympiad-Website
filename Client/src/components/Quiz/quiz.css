@@ -16,16 +16,15 @@ body{
   font-size: 20px;
   font-weight:700;
   width:100%;
-    background-color:blue;
-    padding:15px 0;
+    padding-top:5px;
     color:white;
   
 }
 .ctss-header2{
   text-align: center;
-  color:orange;
-  font-size: 15px;
-  font-weight:500
+  color:#2a58bc;
+  font-size: 20px;
+  font-weight:700
 }
 .ctss-footer{
   text-align: center;

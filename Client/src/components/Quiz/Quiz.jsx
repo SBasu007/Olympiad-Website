@@ -242,8 +242,8 @@ function QuizPage() {
 
   return (
     <>
-    <div className="ctss-header">SMART TALENT</div>
-    <div className="ctss-header2">Talent Search Olympiad</div>
+    <div className="ctss-header"><img src="https://www.talentsearcholympiad.com/assets/images/logo.png" height="50px"/></div>
+    <div className="ctss-header2">TALENT SEARCH OLYMPIAD</div>
     <div className="parent">
       <div className="left">
         <div className="time">
