@@ -242,7 +242,8 @@ function QuizPage() {
 
   return (
     <>
-    <div className="ctss-header">CALCUTTA TALENT SEARCH SCHOOL</div>
+    <div className="ctss-header">SMART TALENT</div>
+    <div className="ctss-header2">Talent Search Olympiad</div>
     <div className="parent">
       <div className="left">
         <div className="time">
