@@ -18,6 +18,12 @@ body{
   font-weight:700
   
 }
+.ctss-header2{
+  text-align: center;
+  color:black;
+  font-size: 15px;
+  font-weight:500
+}
 .ctss-footer{
   text-align: center;
   color:black;
