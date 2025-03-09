@@ -13,7 +13,6 @@ body{
 }
 .ctss-header{
   text-align: center;
-  color:black;
   font-size: 20px;
   font-weight:700;
   width:100%;
@@ -24,7 +23,7 @@ body{
 }
 .ctss-header2{
   text-align: center;
-  color:black;
+  color:orange;
   font-size: 15px;
   font-weight:500
 }
