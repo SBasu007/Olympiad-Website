@@ -120,7 +120,7 @@ function QuizPage() {
 
   // Load the remaining time from localStorage or set to 5 minutes
   const storedTime = localStorage.getItem("remainingTime");
-  const initialTime = storedTime ? JSON.parse(storedTime) : 3000; // 300 seconds = 5 minutes
+  const initialTime = storedTime ? JSON.parse(storedTime) : 600; // 300 seconds = 5 minutes
 
   const [timeLeft, setTimeLeft] = useState(initialTime);
 
@@ -244,6 +244,7 @@ function QuizPage() {
     <>
     <div className="ctss-header"><img src="https://www.talentsearcholympiad.com/assets/images/logo.png" height="50px"/></div>
     <div className="ctss-header2">TALENT SEARCH OLYMPIAD</div>
+    <div className="ctss-header3" style={{}}><a href="https://www.talentsearcholympiad.com/">www.talentsearcholympiad.com</a></div>
     <div className="parent">
       <div className="left">
         <div className="time">

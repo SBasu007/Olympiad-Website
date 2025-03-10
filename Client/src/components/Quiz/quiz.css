@@ -26,6 +26,10 @@ body{
   font-size: 20px;
   font-weight:700
 }
+.ctss-header3{
+  text-align: center;
+  text-decoration: underline;
+}
 .ctss-footer{
   text-align: center;
   color:black;
